@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
     </body>
     <script>
         let humanScore = 0;
@@ -38,7 +40,45 @@
         }
             
         function playGame() {
-            for (let i = 1; i <= 5; i++) {
+            document.getElementById("rock").addEventListener("click", () => {
+                let res = playRound("rock");
+                if (res == "human") {
+                    humanScore++;
+                } else if (res == "computer") {
+                    computerScore++;
+                }
+                console.log(`${humanScore} - ${computerScore}`);
+            });
+            document.getElementById("paper").addEventListener("click", () => {
+                let res = playRound("paper");
+                if (res == "human") {
+                    humanScore++;
+                } else if (res == "computer") {
+                    computerScore++;
+                }
+                console.log(`${humanScore} - ${computerScore}`);
+            });
+            document.getElementById("scissors").addEventListener("click", () => {
+                let res = playRound("scissors");
+                if (res == "human") {
+                    humanScore++;
+                } else if (res == "computer") {
+                    computerScore++;
+                }
+                console.log(`${humanScore} - ${computerScore}`);
+            });
+
+            if (humanScore == 5) {
+                console.log("Human wins");
+                return;
+            } else if (computerScore == 5) {
+                console.log("Computer wins");
+                return;
+            }
+
+            
+
+           /* for (let i = 1; i <= 5; i++) {
                 const computerSelection = getComputerChoice();
                 const humanSelection = getHumanChoice();
                 console.log(humanSelection);
@@ -58,19 +98,24 @@
                 console.log("You lose!");
             } else {
                 console.log("It's a tie!");
-            }
+            }*/
         }
 
-        function playRound(humanChoice, computerChoice) {
+        function playRound(humanChoice) {
+            console.log(humanChoice);
+            let computerChoice = getComputerChoice();
+            console.log(computerChoice);
             if(humanChoice === computerChoice) {
-                return "tie";
+                console.log("tie");
             }
             else if ((computerChoice === "scissors" && humanChoice === "paper") 
                     || (computerChoice === "rock" && humanChoice === "scissors") 
                     || (computerChoice === "paper" && humanChoice === "rock")) {
+                        console.log("computer wins this round.");
                         return "computer";
                     }
             else {
+                console.log("human wins this round.");
                 return "human";
             }
         }
